@@ -20,7 +20,7 @@ def store_result():
 # dispense insulin based on results from test_blood()
 def dispense_insulin():
 
-# individuals 'account' --> name, birthday, etc.
+# individuals 'account' --> name, birthday, weight, etc.
 def persons_attributes():
 
 
