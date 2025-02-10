@@ -9,7 +9,11 @@ import time
 def blood_sugar_calc() :
 
 # read data from body.txt which simulates blood from consumer --> Nick 
-def read_blood(): 
+def read_blood():
+    blood_sugar_file = open('body.txt', 'r')
+    blood_sugar = blood_sugar_file.read()
+    blood_sugar_file.close()
+    return blood_sugar
 
 # interpret data from read_blood() and pass it to dispense_insulin()
 def test_blood():
