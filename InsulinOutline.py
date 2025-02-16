@@ -16,6 +16,7 @@ def read_blood():
     return blood_sugar
 
 # interpret data from read_blood() and pass it to dispense_insulin()
+#Is test_blood() returning a boolean?
 def test_blood():
 
 # store change make to the blood stream in updated_blood.txt --> Joe
@@ -26,8 +27,11 @@ def store_result(insulin_type, units):
     file.close()
 store_result('basal', '10')
 # dispense insulin based on results from test_blood() --> Will L
-def dispense_insulin():
-
+def dispense_insulin(test_results):
+    #Assuming this is a boolean check if insulin is needed
+    if (test_results):
+        insulin_amount = blood_sugar_calc_results
+    return
 # individuals 'account' --> name, birthday, weight, etc.
 def persons_attributes():
 
