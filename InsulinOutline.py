@@ -8,6 +8,18 @@ import time
 import random
 # mathmatical calculation to be called by test_blood() --> Will H
 def blood_sugar_calc() :
+if 200 <= blood_sugar <= 249: 
+    return 2 
+elif 250 <= blood_sugar <= 299: 
+    return 4 
+elif 300 <= blood_sugar <= 349: 
+    return 6 
+elif 350 <= blood_sugar <= 399: 
+    return 8 
+elif 400 <= blood_sugar <= 449: 
+    return 10 
+else: 
+    return 0
 
 # read data from body.txt which simulates blood from consumer --> Nick 
 def read_blood():
