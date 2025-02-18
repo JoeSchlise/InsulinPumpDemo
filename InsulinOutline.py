@@ -8,15 +8,15 @@ import time
 import random
 # mathmatical calculation to be called by test_blood() --> Will H
 def blood_sugar_calc() :
-if 200 <= blood_sugar <= 249: 
+if 200 <= read_blood() <= 249: 
     return 2 
-elif 250 <= blood_sugar <= 299: 
+elif 250 <= read_blood() <= 299: 
     return 4 
-elif 300 <= blood_sugar <= 349: 
+elif 300 <= read_blood() <= 349: 
     return 6 
-elif 350 <= blood_sugar <= 399: 
+elif 350 <= read_blood() <= 399: 
     return 8 
-elif 400 <= blood_sugar <= 449: 
+elif 400 <= read_blood() <= 449: 
     return 10 
 else: 
     return 0
