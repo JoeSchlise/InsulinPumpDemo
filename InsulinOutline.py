@@ -43,6 +43,11 @@ def dispense_insulin(test_results):
     return
 # individuals 'account' --> name, birthday, weight, etc.
 def persons_attributes():
+    F_name = input("Enter your first name: ")
+    L_name = input("Enter your last name: ")
+    b_day = input("Enter your Birthdate: ")
+    weight = input("Enter weight: ")
+    return F_name, L_name, b_day, weight
 
 
 
