@@ -5,6 +5,7 @@
 '''read textbook for examples or sanarios and see how timing plays into dose amount'''
 '''we also need to gather statistics about the person, those can either be entered by us or put in the text file'''
 import time
+import random
 # mathmatical calculation to be called by test_blood() --> Will H
 def blood_sugar_calc() :
 
@@ -14,6 +15,13 @@ def read_blood():
     blood_sugar = blood_sugar_file.read()
     blood_sugar_file.close()
     return blood_sugar
+
+# populate the body.txt file with random data
+def blood_randomizer():
+    blood_sugar_file = open('body.txt', 'w')
+    random_num = random.randint(30, 200)
+    blood_sugar_file.write(str(random_num))
+    blood_sugar_file.close()
 
 # interpret data from read_blood() and pass it to dispense_insulin()
 #Is test_blood() returning a boolean?
@@ -26,6 +34,7 @@ def store_result(insulin_type, units):
     file.write('Date/Time of dose: ' + current_time + ', Units dispensed: ' + units + ', Type: ' + insulin_type + '\n')
     file.close()
 store_result('basal', '10')
+
 # dispense insulin based on results from test_blood() --> Will L
 def dispense_insulin(test_results):
     #Assuming this is a boolean check if insulin is needed
