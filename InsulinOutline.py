@@ -32,7 +32,7 @@ def store_result(insulin_type, units):
     current_time = time.ctime()
     file.write('Date/Time of dose: ' + current_time + ', Units dispensed: ' + units + ', Type: ' + insulin_type + '\n')
     file.close()
-store_result('basal', '10')
+
 
 # dispense insulin based on results from test_blood() --> Will L
 def dispense_insulin():
@@ -62,11 +62,12 @@ def persons_attributes():
     L_name = input("Enter your last name: ")
     b_day = input("Enter your Birthdate: ")
     weight = input("Enter weight: ")
-    return F_name, L_name, b_day, weight
+
 
 
 persons_attributes()
-blood_randomizer()
-read_blood()
-time.sleep(5)
-dispense_insulin()
+for i in range(5):
+    blood_randomizer()
+    read_blood()
+    time.sleep(5)
+    dispense_insulin()
