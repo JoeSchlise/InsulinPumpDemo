@@ -31,7 +31,7 @@ def read_blood():
 # populate the body.txt file with random data
 def blood_randomizer():
     blood_sugar_file = open('body.txt', 'w')
-    random_num = random.randint(30, 200)
+    random_num = random.randint(70, 500)
     blood_sugar_file.write(str(random_num))
     blood_sugar_file.close()
 
