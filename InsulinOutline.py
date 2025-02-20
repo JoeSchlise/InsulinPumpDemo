@@ -8,18 +8,7 @@ import time
 import random
 # mathmatical calculation to be called by test_blood() --> Will H
 def blood_sugar_calc() :
-    if 200 <= read_blood() <= 249: 
-        return 2 
-    elif 250 <= read_blood() <= 299: 
-        return 4 
-    elif 300 <= read_blood() <= 349: 
-        return 6 
-    elif 350 <= read_blood() <= 399: 
-        return 8 
-    elif 400 <= read_blood() <= 449: 
-        return 10 
-    else: 
-        return 0
+   
 
 # read data from body.txt which simulates blood from consumer --> Nick 
 def read_blood():
@@ -35,6 +24,8 @@ def blood_randomizer():
     blood_sugar_file.write(str(random_num))
     blood_sugar_file.close()
 
+# interpret data from read_blood() and pass it to dispense_insulin()
+
 
 # store change make to the blood stream in updated_blood.txt --> Joe
 def store_result(insulin_type, units):
@@ -46,10 +37,27 @@ store_result('basal', '10')
 
 # dispense insulin based on results from test_blood() --> Will L
 def dispense_insulin(test_results):
-    #Assuming this is a boolean check if insulin is needed
-    if (test_results):
-        insulin_amount = blood_sugar_calc_results
-    return
+    units = 0
+     if 200 <= read_blood() <= 249: 
+        units = 2 
+    elif 250 <= read_blood() <= 299: 
+        units = 4 
+    elif 300 <= read_blood() <= 349: 
+        units = 6 
+    elif 350 <= read_blood() <= 399: 
+        units = 8 
+    elif 400 <= read_blood() <= 449: 
+        units = 10 
+    else: 
+        units = 0
+    blood_sugar_file = open('body.txt', 'a')
+    new_blood = 100
+    blood_sugar_file.append("New Blood: 100")
+    blood_sugar_file.close()
+    store_result('Basal', units)
+
+   
+
 # individuals 'account' --> name, birthday, weight, etc.
 def persons_attributes():
     F_name = input("Enter your first name: ")
