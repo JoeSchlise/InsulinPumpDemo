@@ -35,9 +35,6 @@ def blood_randomizer():
     blood_sugar_file.write(str(random_num))
     blood_sugar_file.close()
 
-# interpret data from read_blood() and pass it to dispense_insulin()
-#Is test_blood() returning a boolean?
-def test_blood():
 
 # store change make to the blood stream in updated_blood.txt --> Joe
 def store_result(insulin_type, units):
