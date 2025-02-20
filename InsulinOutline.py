@@ -19,7 +19,7 @@ def read_blood():
 # populate the body.txt file with random data
 def blood_randomizer():
     blood_sugar_file = open('body.txt', 'w')
-    random_num = random.randint(70, 500)
+    random_num = random.randint(30, 500)
     blood_sugar_file.write(str(random_num))
     blood_sugar_file.close()
 
@@ -27,10 +27,10 @@ def blood_randomizer():
 
 
 # store change make to the blood stream in updated_blood.txt --> Joe
-def store_result(insulin_type, units):
+def store_result(insulin_type, units, blood):
     file = open("Results", "a")
     current_time = time.ctime()
-    file.write('Date/Time of dose: ' + current_time + ', Units dispensed: ' + units + ', Type: ' + insulin_type + '\n')
+    file.write('Date/Time of reading: ' + current_time + ', Blood reading: ' + blood + ', Units dispensed: ' + units + ', Type: ' + insulin_type + '\n')
     file.close()
 
 
@@ -48,12 +48,12 @@ def dispense_insulin():
         units = 8
     elif 400 <= blood_sugar <= 449:
         units = 10
-    elif blood_sugar >= 450:
+    elif blood_sugar >= 450 or blood_sugar < 70:
         print("CALL 911")
     blood_sugar_file = open('body.txt', 'w')
     blood_sugar_file.write("100")
     blood_sugar_file.close()
-    store_result('Bolus', str(units))
+    store_result('Bolus', str(units), str(blood_sugar))
 
 
 
@@ -66,9 +66,8 @@ def persons_attributes():
 
 
 
-persons_attributes()
-for i in range(5):
-    blood_randomizer()
-    read_blood()
-    time.sleep(5)
-    dispense_insulin()
+#persons_attributes()
+blood_randomizer()
+read_blood()
+time.sleep(5)
+dispense_insulin()
