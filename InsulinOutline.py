@@ -54,7 +54,7 @@ def dispense_insulin(test_results):
     new_blood = 100
     blood_sugar_file.append("New Blood: 100")
     blood_sugar_file.close()
-    store_result('Basal', units)
+    store_result('Bolus', units)
 
    
 
