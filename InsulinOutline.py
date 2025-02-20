@@ -19,7 +19,7 @@ def read_blood():
 # populate the body.txt file with random data
 def blood_randomizer():
     blood_sugar_file = open('body.txt', 'w')
-    random_num = random.randint(70, 449)
+    random_num = random.randint(70, 500)
     blood_sugar_file.write(str(random_num))
     blood_sugar_file.close()
 
@@ -37,17 +37,18 @@ def store_result(insulin_type, units):
 # dispense insulin based on results from test_blood() --> Will L
 def dispense_insulin():
     units = 0
-    if 200 <= int(read_blood()) <= 249:
+    blood_sugar = int(read_blood())
+    if 200 <= blood_sugar <= 249:
         units = 2
-    elif 250 <= int(read_blood()) <= 299:
+    elif 250 <= blood_sugar <= 299:
         units = 4
-    elif 300 <= int(read_blood()) <= 349:
+    elif 300 <= blood_sugar <= 349:
         units = 6
-    elif 350 <= int(read_blood()) <= 399:
+    elif 350 <= blood_sugar <= 399:
         units = 8
-    elif 400 <= int(read_blood()) <= 449:
+    elif 400 <= blood_sugar <= 449:
         units = 10
-    elif int(read_blood()) > 450:
+    elif blood_sugar >= 450:
         print("CALL 911")
     blood_sugar_file = open('body.txt', 'w')
     blood_sugar_file.write("100")
