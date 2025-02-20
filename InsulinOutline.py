@@ -7,10 +7,9 @@
 import time
 import random
 # mathmatical calculation to be called by test_blood() --> Will H
-def blood_sugar_calc() :
-   
 
-# read data from body.txt which simulates blood from consumer --> Nick 
+
+# read data from body.txt which simulates blood from consumer --> Nick
 def read_blood():
     blood_sugar_file = open('body.txt', 'r')
     blood_sugar = blood_sugar_file.read()
@@ -20,7 +19,7 @@ def read_blood():
 # populate the body.txt file with random data
 def blood_randomizer():
     blood_sugar_file = open('body.txt', 'w')
-    random_num = random.randint(70, 500)
+    random_num = random.randint(70, 449)
     blood_sugar_file.write(str(random_num))
     blood_sugar_file.close()
 
@@ -36,27 +35,26 @@ def store_result(insulin_type, units):
 store_result('basal', '10')
 
 # dispense insulin based on results from test_blood() --> Will L
-def dispense_insulin(test_results):
+def dispense_insulin():
     units = 0
-     if 200 <= read_blood() <= 249: 
-        units = 2 
-    elif 250 <= read_blood() <= 299: 
-        units = 4 
-    elif 300 <= read_blood() <= 349: 
-        units = 6 
-    elif 350 <= read_blood() <= 399: 
-        units = 8 
-    elif 400 <= read_blood() <= 449: 
-        units = 10 
-    else: 
-        units = 0
-    blood_sugar_file = open('body.txt', 'a')
-    new_blood = 100
-    blood_sugar_file.append("New Blood: 100")
+    if 200 <= int(read_blood()) <= 249:
+        units = 2
+    elif 250 <= int(read_blood()) <= 299:
+        units = 4
+    elif 300 <= int(read_blood()) <= 349:
+        units = 6
+    elif 350 <= int(read_blood()) <= 399:
+        units = 8
+    elif 400 <= int(read_blood()) <= 449:
+        units = 10
+    elif int(read_blood()) > 450:
+        print("CALL 911")
+    blood_sugar_file = open('body.txt', 'w')
+    blood_sugar_file.write("100")
     blood_sugar_file.close()
-    store_result('Bolus', units)
+    store_result('Bolus', str(units))
 
-   
+
 
 # individuals 'account' --> name, birthday, weight, etc.
 def persons_attributes():
@@ -67,4 +65,8 @@ def persons_attributes():
     return F_name, L_name, b_day, weight
 
 
-
+persons_attributes()
+blood_randomizer()
+read_blood()
+time.sleep(5)
+dispense_insulin()
