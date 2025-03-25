@@ -27,33 +27,42 @@ def blood_randomizer():
 
 
 # store change make to the blood stream in updated_blood.txt --> Joe
-def store_result(insulin_type, units, blood):
+def store_result(insulin_type, units, blood, new_blood):
     file = open("Results", "a")
     current_time = time.ctime()
-    file.write('Date/Time of reading: ' + current_time + ', Blood reading: ' + blood + ', Units dispensed: ' + units + ', Type: ' + insulin_type + '\n')
+    file.write('Date/Time of reading: ' + current_time + ', Blood reading: ' + blood + ', Units dispensed: ' + units + ', Type: ' + insulin_type +
+               ', Read After Dose: ' + new_blood + '\n')
     file.close()
 
 
 # dispense insulin based on results from test_blood() --> Will L
-def dispense_insulin():
+def dispense_insulin(count):
     units = 0
+    new_blood = 0
     blood_sugar = int(read_blood())
-    if 200 <= blood_sugar <= 249:
-        units = 2
-    elif 250 <= blood_sugar <= 299:
-        units = 4
-    elif 300 <= blood_sugar <= 349:
-        units = 6
-    elif 350 <= blood_sugar <= 399:
-        units = 8
-    elif 400 <= blood_sugar <= 449:
+    if count == 0: #first dose of the day
+        name = "Basal"
         units = 10
-    elif blood_sugar >= 450 or blood_sugar < 70:
-        print("CALL 911")
+        new_blood = 100
+    else:
+        name = "Bolus"
+        if 200 <= blood_sugar <= 249:
+            units = 2
+        elif 250 <= blood_sugar <= 299:
+            units = 4
+        elif 300 <= blood_sugar <= 349:
+            units = 6
+        elif 350 <= blood_sugar <= 399:
+            units = 8
+        elif 400 <= blood_sugar <= 449:
+            units = 10
+        elif blood_sugar >= 450 or blood_sugar < 70:
+            print("CALL 911")
+        new_blood = blood_sugar - (units * 30)
     blood_sugar_file = open('body.txt', 'w')
-    blood_sugar_file.write("100")
+    blood_sugar_file.write(str(new_blood))
     blood_sugar_file.close()
-    store_result('Bolus', str(units), str(blood_sugar))
+    store_result(name, str(units), str(blood_sugar), str(new_blood))
 
 
 
@@ -67,7 +76,10 @@ def persons_attributes():
 
 
 #persons_attributes()
-blood_randomizer()
-read_blood()
-time.sleep(5)
-dispense_insulin()
+count = 0
+for i in range(10):
+    blood_randomizer()
+    read_blood()
+    time.sleep(5)
+    dispense_insulin(count)
+    count = count + 1
