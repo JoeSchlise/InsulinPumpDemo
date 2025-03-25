@@ -6,6 +6,8 @@
 '''we also need to gather statistics about the person, those can either be entered by us or put in the text file'''
 import time
 import random
+import tkinter
+import customtkinter
 # mathmatical calculation to be called by test_blood() --> Will H
 
 
@@ -58,6 +60,7 @@ def dispense_insulin(count):
             units = 10
         elif blood_sugar >= 450 or blood_sugar < 70:
             print("CALL 911")
+            return
         new_blood = blood_sugar - (units * 30)
     blood_sugar_file = open('body.txt', 'w')
     blood_sugar_file.write(str(new_blood))
@@ -74,12 +77,36 @@ def persons_attributes():
     weight = input("Enter weight: ")
 
 
+def start():
+    #persons_attributes()
+    try:
+        count = 0
+        for i in range(10):
+            blood_randomizer()
+            read_blood()
+            time.sleep(5)
+            dispense_insulin(count)
+            count = count + 1
+    except:
+        print('SYSTEM NEEDS MAINTENANCE!!!!!')
 
-#persons_attributes()
-count = 0
-for i in range(10):
-    blood_randomizer()
-    read_blood()
-    time.sleep(5)
-    dispense_insulin(count)
-    count = count + 1
+customtkinter.set_appearance_mode("System")
+customtkinter.set_default_color_theme("blue")
+
+
+app = customtkinter.CTk()
+app.geometry("720x480")
+app.title("Insulin Pump Software")
+
+
+title = customtkinter.CTkLabel(app, text="Blood Sugar Reading")
+title.pack(padx=10,pady=10)
+
+start_pump = customtkinter.CTkButton(app, width=350, height=100, text="Start Pump", command=start)
+start_pump.pack(padx=10, pady=10)
+
+
+
+
+#Run app
+app.mainloop()
