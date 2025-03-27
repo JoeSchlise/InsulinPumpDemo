@@ -6,8 +6,10 @@
 '''we also need to gather statistics about the person, those can either be entered by us or put in the text file'''
 import time
 import random
-import tkinter
 import customtkinter
+from PIL import Image
+
+
 # mathmatical calculation to be called by test_blood() --> Will H
 
 
@@ -79,8 +81,8 @@ def persons_attributes():
 
 def start():
     #persons_attributes()
+    count = 0
     try:
-        count = 0
         for i in range(10):
             blood_randomizer()
             read_blood()
@@ -89,6 +91,10 @@ def start():
             count = count + 1
     except:
         print('SYSTEM NEEDS MAINTENANCE!!!!!')
+
+
+def show_result():
+    result_app.mainloop()
 
 customtkinter.set_appearance_mode("System")
 customtkinter.set_default_color_theme("blue")
@@ -99,11 +105,41 @@ app.geometry("720x480")
 app.title("Insulin Pump Software")
 
 
-title = customtkinter.CTkLabel(app, text="Blood Sugar Reading")
+title = customtkinter.CTkLabel(app, font=("Arial", 24), width=400, height=100, text="Blood Sugar Reading")
 title.pack(padx=10,pady=10)
 
-start_pump = customtkinter.CTkButton(app, width=350, height=100, text="Start Pump", command=start)
+start_pump = customtkinter.CTkButton(app, font=("Arial", 20), width=350, height=100, text="Start Pump", command=start)
 start_pump.pack(padx=10, pady=10)
+
+store_pump = customtkinter.CTkButton(app, font=("Arial", 20), width=350, height=100, text="View Result", command=show_result)
+store_pump.pack(padx=10, pady=10)
+
+
+
+result_app = customtkinter.CTk()
+result_app.geometry("720x480")
+result_app.title("Insulin file")
+
+def load_text():
+    try:
+        with open("Results", "r") as file:  # Replace with your filename
+            content = file.read()
+            text_widget.delete("1.0", customtkinter.END)  # Clear previous text
+            text_widget.insert(customtkinter.END, content)  # Insert new text
+    except FileNotFoundError:
+        text_widget.insert(customtkinter.END, "File not found!")
+
+# Scrollable Frame
+scrollable_frame = customtkinter.CTkScrollableFrame(result_app, width=500, height=250)
+scrollable_frame.pack(pady=20, padx=20, fill="both", expand=True)
+
+# Textbox inside Scrollable Frame
+text_widget = customtkinter.CTkTextbox(scrollable_frame, wrap="word", width=480, height=230)
+text_widget.pack(fill="both", expand=True, padx=10, pady=10)
+
+
+
+
 
 
 
