@@ -37,11 +37,7 @@ def store_result(insulin_type, units, blood, new_blood):
     file.write('Date/Time of reading: ' + current_time + ', Blood reading: ' + blood + ', Units dispensed: ' + units + ', Type: ' + insulin_type +
                ', Read After Dose: ' + new_blood + '\n')
     file.close()
-#Start on the 911 function
-def call_911(app):
-    app.configure(bg = "red")
-    911_button = customtkinter.CTkButton(app, font=("Arial", 20), width=350, height=100, text="Call 911")
-    911_button.pack(padx=10, pady=10)
+
 
 # dispense insulin based on results from test_blood() --> Will L
 def dispense_insulin(count):
@@ -65,8 +61,7 @@ def dispense_insulin(count):
         elif 400 <= blood_sugar <= 449:
             units = 10
         elif blood_sugar >= 450 or blood_sugar < 70:
-            #print("CALL 911")
-            call_911(app)
+            print("CALL 911")
             return
         new_blood = blood_sugar - (units * 30)
     blood_sugar_file = open('body.txt', 'w')
@@ -119,7 +114,8 @@ start_pump.pack(padx=10, pady=10)
 store_pump = customtkinter.CTkButton(app, font=("Arial", 20), width=350, height=100, text="View Result", command=show_result)
 store_pump.pack(padx=10, pady=10)
 
-
+stop = customtkinter.CTkButton(app, font=("Arial", 20), width=350, height=100, text="Stop Pump")
+stop.pack(padx=10, pady=10)
 
 result_app = customtkinter.CTk()
 result_app.geometry("720x480")
