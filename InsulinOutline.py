@@ -93,57 +93,54 @@ def start():
         print('SYSTEM NEEDS MAINTENANCE!!!!!')
 
 
-def show_result():
-    result_app.mainloop()
-
+#This is UI setup/initialization
 customtkinter.set_appearance_mode("System")
 customtkinter.set_default_color_theme("blue")
-
-
 app = customtkinter.CTk()
-app.geometry("720x480")
+app.geometry("900x700")
 app.title("Insulin Pump Software")
 
 
-title = customtkinter.CTkLabel(app, font=("Arial", 24), width=400, height=100, text="Blood Sugar Reading")
-title.pack(padx=10,pady=10)
+# This creates tabs that you can go back and forth on
+def tab1():
+    def tab2():
+        title1.destroy()
+        start_pump.destroy()
+        view_result.destroy()
+        stop.destroy()
+        title2 = customtkinter.CTkLabel(app, font=("Arial", 24), width=400, height=100, text="Insulin Dispensing History")
+        title2.pack(padx=10, pady=10)
 
-start_pump = customtkinter.CTkButton(app, font=("Arial", 20), width=350, height=100, text="Start Pump", command=start)
-start_pump.pack(padx=10, pady=10)
+        scrollable_frame = customtkinter.CTkScrollableFrame(app, width=500, height=250)
+        scrollable_frame.pack(pady=20, padx=20, fill="both", expand=True)
 
-store_pump = customtkinter.CTkButton(app, font=("Arial", 20), width=350, height=100, text="View Result", command=show_result)
-store_pump.pack(padx=10, pady=10)
+        # View data inside Scrollable Frame
+        result = open('Results', 'r')
+        data = result.read()
+        result.close()
 
-stop = customtkinter.CTkButton(app, font=("Arial", 20), width=350, height=100, text="Stop Pump")
-stop.pack(padx=10, pady=10)
+        text_widget = customtkinter.CTkLabel(scrollable_frame, text=data, font=("Arial", 14), width=600, height=230)
+        text_widget.pack(padx=10, pady=10)
+        def back():
+            for widget in app.winfo_children():
+                widget.destroy()
+            tab1()
+        back = customtkinter.CTkButton(app, font=("Arial", 20), width=400, height=100, text="Go Back", command=back)
+        back.pack(pady=100)
 
-result_app = customtkinter.CTk()
-result_app.geometry("720x480")
-result_app.title("Insulin file")
+    title1 = customtkinter.CTkLabel(app, font=("Arial", 24), width=400, height=100, text="Insulin Pump Commands")
+    title1.pack(padx=10,pady=10)
 
-def load_text():
-    try:
-        with open("Results", "r") as file:  # Replace with your filename
-            content = file.read()
-            text_widget.delete("1.0", customtkinter.END)  # Clear previous text
-            text_widget.insert(customtkinter.END, content)  # Insert new text
-    except FileNotFoundError:
-        text_widget.insert(customtkinter.END, "File not found!")
+    start_pump = customtkinter.CTkButton(app, font=("Arial", 20), width=350, height=100, text="Start Pump", command=start)
+    start_pump.pack(padx=10, pady=10)
 
-# Scrollable Frame
-scrollable_frame = customtkinter.CTkScrollableFrame(result_app, width=500, height=250)
-scrollable_frame.pack(pady=20, padx=20, fill="both", expand=True)
+    view_result = customtkinter.CTkButton(app, font=("Arial", 20), width=350, height=100, text="View Result", command=tab2)
+    view_result.pack(padx=10, pady=10)
 
-# Textbox inside Scrollable Frame
-text_widget = customtkinter.CTkTextbox(scrollable_frame, wrap="word", width=480, height=230)
-text_widget.pack(fill="both", expand=True, padx=10, pady=10)
+    stop = customtkinter.CTkButton(app, font=("Arial", 20), width=350, height=100, text="Stop Pump")
+    stop.pack(padx=10, pady=10)
 
-
-
-
-
-
-
+tab1()
 
 #Run app
 app.mainloop()
