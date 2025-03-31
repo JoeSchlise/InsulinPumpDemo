@@ -79,22 +79,29 @@ def persons_attributes():
     b_day = input("Enter your Birthdate: ")
     weight = input("Enter weight: ")
 
-
+THREAD_ON = True
 def pump_running():
-    count = 0
     try:
-        for i in range(10):
+        count = 0
+        while THREAD_ON:
             blood_randomizer()
             read_blood()
             time.sleep(5)
             dispense_insulin(count)
             count = count + 1
+            print("looping")
     except:
         print('SYSTEM NEEDS MAINTENANCE!!!!!')
 
 def start():
     thread = threading.Thread(target=pump_running)
     thread.start()
+
+def stop_pump():
+    global THREAD_ON
+    THREAD_ON = False
+    print("Pump is turning off...")
+
 
 
 #This is UI setup/initialization
@@ -141,7 +148,7 @@ def tab1():
     view_result = customtkinter.CTkButton(app, font=("Arial", 20), width=350, height=100, text="View Result", command=tab2)
     view_result.pack(padx=10, pady=10)
 
-    stop = customtkinter.CTkButton(app, font=("Arial", 20), width=350, height=100, text="Stop Pump")
+    stop = customtkinter.CTkButton(app, font=("Arial", 20), width=350, height=100, text="Stop Pump", command=stop_pump)
     stop.pack(padx=10, pady=10)
 
 tab1()
