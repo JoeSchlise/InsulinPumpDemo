@@ -89,7 +89,6 @@ def pump_running():
             time.sleep(5)
             dispense_insulin(count)
             count = count + 1
-            print("looping")
     except:
         print('SYSTEM NEEDS MAINTENANCE!!!!!')
 
