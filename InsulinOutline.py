@@ -7,6 +7,7 @@
 import time
 import random
 import customtkinter
+import threading
 from PIL import Image
 
 
@@ -79,8 +80,7 @@ def persons_attributes():
     weight = input("Enter weight: ")
 
 
-def start():
-    #persons_attributes()
+def pump_running():
     count = 0
     try:
         for i in range(10):
@@ -91,6 +91,10 @@ def start():
             count = count + 1
     except:
         print('SYSTEM NEEDS MAINTENANCE!!!!!')
+
+def start():
+    thread = threading.Thread(target=pump_running)
+    thread.start()
 
 
 #This is UI setup/initialization
