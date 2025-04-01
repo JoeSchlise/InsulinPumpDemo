@@ -39,7 +39,28 @@ def store_result(insulin_type, units, blood, new_blood):
                ', Read After Dose: ' + new_blood + '\n')
     file.close()
 
+#Function to call when changing the frame
+def trigger_emergency():
+    for widget in app.winfo_children():
+        widget.destroy()  # Remove all existing UI elements
 
+    app.configure(bg="red")  # Change background to red
+
+    alert_label = customtkinter.CTkLabel(
+        app, text="CALL 911!", font=("Arial", 48, "bold"), text_color="white", width=600, height=300
+    )
+    alert_label.pack(expand=True)  # Center the label
+
+    stop_button = customtkinter.CTkButton(
+        app, text="Acknowledge", font=("Arial", 24), command=reset_ui
+    )
+    stop_button.pack(pady=20)
+
+def reset_ui():
+    for widget in app.winfo_children():
+        widget.destroy()  # Clear emergency screen
+    app.configure(bg="SystemButtonFace")  # Reset background
+    tab1()  # Restore main UI
 # dispense insulin based on results from test_blood() --> Will L
 def dispense_insulin(count):
     units = 0
@@ -62,7 +83,7 @@ def dispense_insulin(count):
         elif 400 <= blood_sugar <= 449:
             units = 10
         elif blood_sugar >= 450 or blood_sugar < 70:
-            print("CALL 911")
+            trigger_emergency()
             return
         new_blood = blood_sugar - (units * 30)
     blood_sugar_file = open('body.txt', 'w')
