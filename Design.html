@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Insulin Pump</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <h1>Insulin Pump Controller</h1>
+    <div class="status-indicator">
+  Pump Status: <span class="{{ 'running' if status == 'Running' else 'stopped' }}">{{ status }}</span>
+</div>
+<div class="button-wrapper">
+  <form action="/start" method="POST">
+    <button class="StartButton" type="submit">Start Pump</button>
+  </form>
+
+  <form action="/stop" method="POST">
+    <button class="StopButton" type="submit">Stop Pump</button>
+  </form>
+</div>
+<script>
+  function updateStatus() {
+    fetch('/status')
+      .then(response => response.json())
+      .then(data => {
+        const statusSpan = document.getElementById("pumpStatus");
+        statusSpan.textContent = data.status;
+        statusSpan.className = data.status === "Running" ? "running" : "stopped";
+      });
+  }
+
+  // Poll the server every 2 seconds
+  setInterval(updateStatus, 2000);
+  updateStatus(); // Initial call
+</script>
+  </body>
+</html>
