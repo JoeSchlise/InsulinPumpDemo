@@ -35,10 +35,15 @@ def blood_randomizer():
 def store_result(insulin_type, units, blood, new_blood):
     file = open("Results", "a")
     current_time = time.ctime()
-    file.write('Date/Time of reading: ' + current_time + ', Blood reading: ' + blood + ', Units dispensed: ' + units + ', Type: ' + insulin_type +
-               ', Read After Dose: ' + new_blood + '\n')
+    file.write(
+        f"{current_time:<25} "
+        f"Blood: {blood:<5} "
+        f"Units: {units:<3} "
+        f"Type: {insulin_type:<6} "
+        f"New Blood: {new_blood:<5}\n"
+    )
     file.close()
-
+'''
 #Function to call when changing the frame
 def trigger_emergency():
     for widget in app.winfo_children():
@@ -62,6 +67,7 @@ def reset_ui():
     app.configure(bg="SystemButtonFace")  # Reset background
     tab1()  # Restore main UI
 # dispense insulin based on results from test_blood() --> Will L
+'''
 def dispense_insulin(count):
     units = 0
     new_blood = 0
@@ -83,7 +89,7 @@ def dispense_insulin(count):
         elif 400 <= blood_sugar <= 449:
             units = 10
         elif blood_sugar >= 450 or blood_sugar < 70:
-            trigger_emergency()
+           # trigger_emergency()
             return
         new_blood = blood_sugar - (units * 30)
     blood_sugar_file = open('body.txt', 'w')
@@ -113,7 +119,7 @@ def pump_running():
     except:
         print('SYSTEM NEEDS MAINTENANCE!!!!!')
 
-def start():
+def start_thread():
     thread = threading.Thread(target=pump_running)
     thread.start()
 
@@ -122,7 +128,7 @@ def stop_pump():
     THREAD_ON = False
     print("Pump is turning off...")
 
-
+'''
 
 #This is UI setup/initialization
 customtkinter.set_appearance_mode("System")
@@ -175,3 +181,5 @@ tab1()
 
 #Run app
 app.mainloop()
+
+'''
