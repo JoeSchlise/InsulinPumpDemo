@@ -21,24 +21,26 @@ body {
 
 
 .StartButton,
-.StopButton {
+.StopButton,
+ .ViewButton{
   display: block;
   margin: 0 auto;
   text-align: center;
-  background-color: blue;
+  background-color: #20B2AA;
   color: white;
   border: 2px solid #1c2023;
   border-radius: 100px;
   cursor: pointer;
 
   padding: 100px 200px;
-  font-size: 18px;
+  font-size: 40px;
 }
 
 .StartButton:hover,
-.StopButton:hover {
-  background-color: #1c2023;
-  color: red;
+.StopButton:hover,
+.ViewButton:hover{
+  background-color: #40E0d0;
+  color: white;
 }
 
 .status-indicator {
@@ -54,4 +56,34 @@ body {
 .stopped {
   color: red;
   font-weight: bold;
+}
+
+.results-box {
+    width: 50%;
+    margin: 20px auto;
+    padding: 1px;
+    background-color: #f8f8f8;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-family: monospace;
+    font-size: 16px;
+    white-space: pre-wrap; /* keeps line breaks */
+    overflow-y: auto; /* scroll vertically if needed */
+    max-height: 400px;
+}
+
+.BackButton {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.BackButton:hover {
+    background-color: #0056b3;
 }
