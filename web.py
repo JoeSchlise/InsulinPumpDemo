@@ -42,25 +42,26 @@ def create_account_page():
 def start():
     global pump_status
     pump_status = "Running"
-    print("Pump Started!")
     start_thread()
-    return redirect(url_for("Design.html"))
+    return render_template("Design.html", status=pump_status)
 
 @app.route("/stop", methods=["POST"])
 def stop():
     global pump_status
     pump_status = "Stopped"
-    print("Pump Stopped!")
     stop_pump()
-    return redirect(url_for("Design.html"))
+    return render_template("Design.html", status=pump_status)
 
 @app.route("/view_result", methods=["POST"])
 def results():
-    print("View Results")
     with open("Results", "r") as f:
         data = f.read()
     return render_template("results.html", results=data)
 
+@app.route("/pump", methods=["GET"])
+def pump_page():
+    global pump_status
+    return render_template("Design.html", status=pump_status)
 
 
 if __name__ == "__main__":
