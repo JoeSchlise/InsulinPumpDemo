@@ -10,14 +10,11 @@ pump_status = "Stopped"
 @app.route("/")
 def home():
     global pump_status
+    print("User logging in")
     return render_template("Login.html", status=pump_status)
 
 @app.route("/status")
 
-@app.route("/login")
-def login():
-    print("User logging in")
-    return render_template("Login.html")
 
 @app.route("/start", methods=["POST"])
 def start():
