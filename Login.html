@@ -7,17 +7,20 @@
   </head>
   <body>
     <h1> Login </h1>
-    
-    <form action="/" method="POST">
-      <label for="first">Username:</label>
-      <input type="text" id="first" name="first" 
+
+    <form action="/login" method="POST">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username"
           placeholder="Enter your Username" required>
 
       <label for="password">Password:</label>
-    <input type="password" id="password" name="password" 
+    <input type="password" id="password" name="password"
         placeholder="Enter your Password" required>
     <button type="submit"> Submit </button>
     </form>
-    
+    <form action="/create_account" method="GET">
+    <button type="submit">Create New Account</button>
+  </form>
+
   </body>
 </html>
