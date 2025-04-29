@@ -10,7 +10,7 @@ pump_status = "Stopped"
 @app.route("/")
 def home():
     global pump_status
-    return render_template("Design.html", status=pump_status)
+    return render_template("Login.html", status=pump_status)
 
 @app.route("/status")
 
