@@ -1,6 +1,7 @@
-from flask import Flask, redirect, url_for, render_template
+from flask import Flask, redirect, url_for, render_template, request
 from InsulinOutline import *
 from flask_socketio import SocketIO
+from login import *
 
 app = Flask(__name__)
 socketio = SocketIO(app)
@@ -10,11 +11,32 @@ pump_status = "Stopped"
 @app.route("/")
 def home():
     global pump_status
-    print("User logging in")
     return render_template("Login.html", status=pump_status)
 
 @app.route("/status")
 
+@app.route("/login", methods=["GET", "POST"])  # <-- ADD methods here
+def login_page():
+    print("User logging in")
+    if request.method == "POST":
+        username = request.form.get("username")
+        password = request.form.get("password")
+        if(login(username, password)):
+            return render_template("Design.html")
+        else:
+            return render_template("Login.html")
+
+@app.route("/create_account", methods=["GET", "POST"])
+def create_account_page():
+    if request.method == "POST":
+        new_username = request.form.get("new_username")
+        new_password = request.form.get("new_password")
+        print("New account info:", new_username, new_password)
+        create_account(new_username, new_password)
+        # Here you would save the account info, etc
+        return redirect(url_for("home"))
+
+    return render_template("create_account.html")
 
 @app.route("/start", methods=["POST"])
 def start():
@@ -22,8 +44,7 @@ def start():
     pump_status = "Running"
     print("Pump Started!")
     start_thread()
-    return redirect(url_for("home"))
-
+    return redirect(url_for("Design.html"))
 
 @app.route("/stop", methods=["POST"])
 def stop():
@@ -31,7 +52,7 @@ def stop():
     pump_status = "Stopped"
     print("Pump Stopped!")
     stop_pump()
-    return redirect(url_for("home"))
+    return redirect(url_for("Design.html"))
 
 @app.route("/view_result", methods=["POST"])
 def results():
