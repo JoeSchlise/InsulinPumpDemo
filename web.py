@@ -7,6 +7,7 @@ app = Flask(__name__)
 socketio = SocketIO(app)
 
 pump_status = "Stopped"
+file = ""
 
 @app.route("/")
 def home():
@@ -21,7 +22,14 @@ def login_page():
     if request.method == "POST":
         username = request.form.get("username")
         password = request.form.get("password")
-        if(login(username, password)):
+
+        TrueorFalse, file_from_login = login(username, password)
+        print(TrueorFalse)
+        print(file_from_login)
+
+        if(TrueorFalse):
+            global file
+            file = file_from_login
             return render_template("Design.html")
         else:
             return render_template("Login.html")
@@ -54,7 +62,8 @@ def stop():
 
 @app.route("/view_result", methods=["POST"])
 def results():
-    with open("Results", "r") as f:
+    global file
+    with open(file, "r") as f:
         data = f.read()
     return render_template("results.html", results=data)
 
