@@ -14,6 +14,11 @@ def home():
 
 @app.route("/status")
 
+@app.route("/login")
+def login():
+    print("User logging in")
+    return render_template("Login.html")
+
 @app.route("/start", methods=["POST"])
 def start():
     global pump_status
@@ -21,6 +26,7 @@ def start():
     print("Pump Started!")
     start_thread()
     return redirect(url_for("home"))
+
 
 @app.route("/stop", methods=["POST"])
 def stop():
