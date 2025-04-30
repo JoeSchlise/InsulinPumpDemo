@@ -33,9 +33,9 @@ def blood_randomizer():
 
 
 # store change make to the blood stream in updated_blood.txt --> Joe
-def store_result(insulin_type, units, blood, new_blood):
-    print(file + "this is the file from web")
-    file2 = open(file, "a")
+def store_result(insulin_type, units, blood, new_blood, filepath):
+    print(filepath + "this is the file from web")
+    file2 = open(filepath, "a")
     current_time = time.ctime()
     file2.write(
         f"{current_time:<25} "
@@ -70,7 +70,7 @@ def reset_ui():
     tab1()  # Restore main UI
 # dispense insulin based on results from test_blood() --> Will L
 '''
-def dispense_insulin(count):
+def dispense_insulin(count, file):
     print("are we in?")
     units = 0
     new_blood = 0
@@ -105,7 +105,7 @@ def dispense_insulin(count):
     print("bottom3")
     blood_sugar_file.close()
     print("bottom4")
-    store_result(name, str(units), str(blood_sugar), str(new_blood))
+    store_result(name, str(units), str(blood_sugar), str(new_blood), file)
     print("bottom5")
 
 
@@ -118,7 +118,7 @@ def persons_attributes():
     weight = input("Enter weight: ")
 
 THREAD_ON = True
-def pump_running():
+def pump_running(file):
     try:
         print("we in")
         print(THREAD_ON)
@@ -131,16 +131,16 @@ def pump_running():
             print("2")
             time.sleep(5)
             print("3")
-            dispense_insulin(count)
+            dispense_insulin(count, file)
             print("4")
             count = count + 1
     except:
         print('SYSTEM NEEDS MAINTENANCE!!!!!')
 
-def start_thread():
+def start_thread(file):
     global THREAD_ON
     THREAD_ON = True
-    thread = threading.Thread(target=pump_running)
+    thread = threading.Thread(target=pump_running, args=(file,))
     thread.start()
 
 def stop_pump():
