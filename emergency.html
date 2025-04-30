@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>🚨 EMERGENCY 🚨</title>
+  <style>
+    body {
+      background-color: red;
+      color: white;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      padding-top: 100px;
+    }
+
+    .alert {
+      font-size: 48px;
+      font-weight: bold;
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    button {
+      margin-top: 50px;
+      padding: 20px 40px;
+      font-size: 24px;
+      background-color: white;
+      color: red;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: #ffcccc;
+    }
+  </style>
+</head>
+<body>
+  <div class="alert">CRITICAL BLOOD SUGAR DETECTED!<br> CALL 911 IMMEDIATELY!</div>
+
+  <!-- Alarm sound (must be placed in static folder) -->
+  <audio autoplay loop>
+    <source src="{{ url_for('static', filename='siren-alert-96052.mp3') }}" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- Acknowledge form -->
+  <form method="POST" action="/emergency">
+    <button type="submit">Acknowledge</button>
+  </form>
+</body>
+</html>
