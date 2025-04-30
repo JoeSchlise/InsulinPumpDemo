@@ -1,3 +1,4 @@
+
 from flask import Flask, redirect, url_for, render_template, request
 from InsulinOutline import *
 from flask_socketio import SocketIO
@@ -25,7 +26,7 @@ def login_page():
 
         TrueorFalse, file_from_login = login(username, password)
 
-        if(TrueorFalse):
+        if TrueorFalse:
             global file
             file = file_from_login
             print(file + "this is from web.py")
@@ -49,7 +50,7 @@ def create_account_page():
 def start():
     global pump_status
     pump_status = "Running"
-    start_thread()
+    start_thread(file)
     return render_template("Design.html", status=pump_status)
 
 @app.route("/stop", methods=["POST"])
