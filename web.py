@@ -24,12 +24,11 @@ def login_page():
         password = request.form.get("password")
 
         TrueorFalse, file_from_login = login(username, password)
-        print(TrueorFalse)
-        print(file_from_login)
 
         if(TrueorFalse):
             global file
             file = file_from_login
+            print(file + "this is from web.py")
             return render_template("Design.html")
         else:
             return render_template("Login.html")
