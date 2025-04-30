@@ -9,6 +9,7 @@ import random
 import customtkinter
 import threading
 from PIL import Image
+from web import file
 
 
 # mathmatical calculation to be called by test_blood() --> Will H
@@ -33,16 +34,17 @@ def blood_randomizer():
 
 # store change make to the blood stream in updated_blood.txt --> Joe
 def store_result(insulin_type, units, blood, new_blood):
-    file = open("Results", "a")
+    print(file + "this is the file from web")
+    file2 = open(file, "a")
     current_time = time.ctime()
-    file.write(
+    file2.write(
         f"{current_time:<25} "
         f"Blood: {blood:<5} "
         f"Units: {units:<3} "
         f"Type: {insulin_type:<6} "
         f"New Blood: {new_blood:<5}\n"
     )
-    file.close()
+    file2.close()
 '''
 #Function to call when changing the frame
 def trigger_emergency():
@@ -69,14 +71,18 @@ def reset_ui():
 # dispense insulin based on results from test_blood() --> Will L
 '''
 def dispense_insulin(count):
+    print("are we in?")
     units = 0
     new_blood = 0
     blood_sugar = int(read_blood())
+    print("are we in?")
     if count == 0: #first dose of the day
         name = "Basal"
         units = 10
         new_blood = 100
+        print("0")
     else:
+        print("else")
         name = "Bolus"
         if 200 <= blood_sugar <= 249:
             units = 2
@@ -92,10 +98,15 @@ def dispense_insulin(count):
            # trigger_emergency()
             return
         new_blood = blood_sugar - (units * 30)
+    print("bottom")
     blood_sugar_file = open('body.txt', 'w')
+    print("bottom2")
     blood_sugar_file.write(str(new_blood))
+    print("bottom3")
     blood_sugar_file.close()
+    print("bottom4")
     store_result(name, str(units), str(blood_sugar), str(new_blood))
+    print("bottom5")
 
 
 
@@ -109,17 +120,26 @@ def persons_attributes():
 THREAD_ON = True
 def pump_running():
     try:
+        print("we in")
+        print(THREAD_ON)
         count = 0
         while THREAD_ON:
+            print("running")
             blood_randomizer()
+            print("1")
             read_blood()
+            print("2")
             time.sleep(5)
+            print("3")
             dispense_insulin(count)
+            print("4")
             count = count + 1
     except:
         print('SYSTEM NEEDS MAINTENANCE!!!!!')
 
 def start_thread():
+    global THREAD_ON
+    THREAD_ON = True
     thread = threading.Thread(target=pump_running)
     thread.start()
 
