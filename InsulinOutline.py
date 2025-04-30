@@ -71,18 +71,27 @@ def reset_ui():
 # dispense insulin based on results from test_blood() --> Will L
 '''
 def dispense_insulin(count, file):
-    print("are we in?")
+
     units = 0
     new_blood = 0
     blood_sugar = int(read_blood())
-    print("are we in?")
+
+    if blood_sugar >= 450 or blood_sugar < 70:
+        with open("emergency.txt", "w") as f:
+            f.write("true")
+        return  # Stop insulin logic if emergency triggered
+
+        # Clear emergency flag if levels are normal again
+    with open("emergency.txt", "w") as f:
+        f.write("false")
+
     if count == 0: #first dose of the day
         name = "Basal"
         units = 10
         new_blood = 100
-        print("0")
+
     else:
-        print("else")
+
         name = "Bolus"
         if 200 <= blood_sugar <= 249:
             units = 2
@@ -95,18 +104,13 @@ def dispense_insulin(count, file):
         elif 400 <= blood_sugar <= 449:
             units = 10
         elif blood_sugar >= 450 or blood_sugar < 70:
-           # trigger_emergency()
+
             return
         new_blood = blood_sugar - (units * 30)
-    print("bottom")
     blood_sugar_file = open('body.txt', 'w')
-    print("bottom2")
     blood_sugar_file.write(str(new_blood))
-    print("bottom3")
     blood_sugar_file.close()
-    print("bottom4")
     store_result(name, str(units), str(blood_sugar), str(new_blood), file)
-    print("bottom5")
 
 
 
@@ -120,19 +124,15 @@ def persons_attributes():
 THREAD_ON = True
 def pump_running(file):
     try:
-        print("we in")
+
         print(THREAD_ON)
         count = 0
         while THREAD_ON:
             print("running")
             blood_randomizer()
-            print("1")
             read_blood()
-            print("2")
             time.sleep(5)
-            print("3")
             dispense_insulin(count, file)
-            print("4")
             count = count + 1
     except:
         print('SYSTEM NEEDS MAINTENANCE!!!!!')
