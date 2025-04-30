@@ -72,6 +72,19 @@ def pump_page():
     global pump_status
     return render_template("Design.html", status=pump_status)
 
+@app.route("/emergency_check")
+def emergency_check():
+    with open("emergency.txt", "r") as f:
+        return f.read().strip()
+
+@app.route("/emergency", methods=["GET", "POST"])
+def emergency_page():
+    if request.method == "POST":
+        with open("emergency.txt", "w") as f:
+            f.write("false")
+        return redirect(url_for("pump_page"))
+    return render_template("emergency.html")
+
 
 if __name__ == "__main__":
     socketio.run(app, debug=True)
