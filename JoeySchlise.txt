@@ -1,0 +1,14 @@
+Tue Apr 29 20:26:45 2025  Blood: 211   Units: 10  Type: Basal  New Blood: 100  
+Tue Apr 29 20:26:55 2025  Blood: 380   Units: 8   Type: Bolus  New Blood: 140  
+Tue Apr 29 20:27:05 2025  Blood: 416   Units: 10  Type: Bolus  New Blood: 116  
+Wed Apr 30 16:09:35 2025  Blood: 185   Units: 10  Type: Basal  New Blood: 100  
+Wed Apr 30 16:09:40 2025  Blood: 356   Units: 8   Type: Bolus  New Blood: 116  
+Wed Apr 30 16:09:45 2025  Blood: 251   Units: 10  Type: Basal  New Blood: 100  
+Wed Apr 30 16:09:50 2025  Blood: 333   Units: 6   Type: Bolus  New Blood: 153  
+Wed Apr 30 16:09:55 2025  Blood: 257   Units: 4   Type: Bolus  New Blood: 137  
+Wed Apr 30 16:10:00 2025  Blood: 266   Units: 4   Type: Bolus  New Blood: 146  
+Wed Apr 30 16:10:05 2025  Blood: 246   Units: 2   Type: Bolus  New Blood: 186  
+Wed Apr 30 16:10:10 2025  Blood: 222   Units: 2   Type: Bolus  New Blood: 162  
+Wed Apr 30 16:10:15 2025  Blood: 320   Units: 6   Type: Bolus  New Blood: 140  
+Wed Apr 30 16:10:20 2025  Blood: 224   Units: 2   Type: Bolus  New Blood: 164  
+Wed Apr 30 16:10:25 2025  Blood: 144   Units: 0   Type: Bolus  New Blood: 144  
