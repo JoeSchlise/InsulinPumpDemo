@@ -43,13 +43,13 @@
 <body>
   <div class="alert">CRITICAL BLOOD SUGAR DETECTED!<br> CALL 911 IMMEDIATELY!</div>
 
-  <!-- Alarm sound (must be placed in static folder) -->
+
   <audio autoplay loop>
     <source src="{{ url_for('static', filename='siren-alert-96052.mp3') }}" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
 
-  <!-- Acknowledge form -->
+
   <form method="POST" action="/emergency">
     <button type="submit">Acknowledge</button>
   </form>
